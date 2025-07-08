@@ -45,6 +45,9 @@ app.use(passport.session())
 passport.use(new Localstrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
+app.engine("ejs", ejsMate);
+app.set("view engine", "ejs");
+
 main()
   .then(() => {
     console.log("connected to DB");
@@ -99,10 +102,14 @@ app.use("/",user)
 app.all("*",(req,res,next)=>{
   next(new ExpressError(404," this page not found"))
 })
-app.use((err,req,res,next)=>{
-  let {status=500,message="something went wrong"}=err
-  res.status(status).render("error.ejs",{message})
-})
+app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  const { status = 500, message = "Something went wrong" } = err;
+  res.status(status).render("error", { message });
+});
+
 app.listen(8080, () => {
   console.log("server is listening to port 8080");
 });

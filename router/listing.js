@@ -19,9 +19,9 @@ router.route("/")
 .post(upload.single('listing[image]'),validateListing, wrapAsync(listingcontroller.create))
 
 //New Route
-router.get("/new",IsLoggedIn,wrapAsync( (req, res) => {
+router.get("/new",IsLoggedIn, (req, res) => {
   res.render("listings/new.ejs");
-}));
+});
 
 //Show Route
 //update route
