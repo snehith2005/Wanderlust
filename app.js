@@ -6,6 +6,7 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate=require("ejs-mate")
+const ExpressError = require("./utils/ExpressError");
 const { listingSchema, reviewSchema } = require("./schema.js");
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const Review=require("./models/review.js");
