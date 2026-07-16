@@ -47,7 +47,6 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
-
 main()
   .then(() => {
     console.log("connected to DB");
