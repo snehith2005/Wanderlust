@@ -96,9 +96,13 @@ app.use((req,res,next)=>{
 //   let userregister=await User.register(fakeuser,"hello")
 //   res.send(userregister)
 // })
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 app.use("/listings",listings)
 app.use("/listings/:id/reviews",reviews)
 app.use("/",user)
+
 app.all("*",(req,res,next)=>{
   next(new ExpressError(404," this page not found"))
 })
